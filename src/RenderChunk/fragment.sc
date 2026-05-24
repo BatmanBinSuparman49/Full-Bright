@@ -33,11 +33,9 @@ void main() {
   vec3 lightTint = texture2D(s_LightMapTexture, v_lightmapUV).rgb;
   lightTint = mix(lightTint.bbb, lightTint*lightTint, 0.35 + 0.65*v_lightmapUV.y*v_lightmapUV.y*v_lightmapUV.y);
 
-  diffuse.rgb *= lightTint;
+  // diffuse.rgb *= lightTint;
 
-  // diffuse.rgb *= color.rgb;
-
-  diffuse.rgb = mix(diffuse.rgb, v_fog.rgb, v_fog.a);
+  // diffuse.rgb = mix(diffuse.rgb, v_fog.rgb, v_fog.a);
 
   gl_FragColor = diffuse;
 }

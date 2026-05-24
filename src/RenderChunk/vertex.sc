@@ -24,7 +24,7 @@ void main() {
 
   #if !(defined(DEPTH_ONLY_OPAQUE) || defined(DEPTH_ONLY) || defined(INSTANCING))
 
-  worldPos.y -= 100.0*RenderChunkFogAlpha.x*RenderChunkFogAlpha.x*RenderChunkFogAlpha.x;
+  // worldPos.y -= 100.0*RenderChunkFogAlpha.x*RenderChunkFogAlpha.x*RenderChunkFogAlpha.x;
 
   vec4 color;
   #ifdef RENDER_AS_BILLBOARDS
