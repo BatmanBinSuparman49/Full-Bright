@@ -1,4 +1,4 @@
-$input v_color0, v_color1, v_texcoord0, v_lightmapUV
+$input v_color0, v_color1, v_texcoord0, v_lightmapUV, v_fog
 
 #include <bgfx_shader.sh>
 
@@ -33,9 +33,11 @@ void main() {
   vec3 lightTint = texture2D(s_LightMapTexture, v_lightmapUV).rgb;
   lightTint = mix(lightTint.bbb, lightTint*lightTint, 0.35 + 0.65*v_lightmapUV.y*v_lightmapUV.y*v_lightmapUV.y);
 
+  diffuse.rgb *= lightTint;
+
   // diffuse.rgb *= color.rgb;
 
-  // diffuse.rgb = mix(diffuse.rgb, FogColor.rgb, FogColor.a);
+  diffuse.rgb = mix(diffuse.rgb, v_fog.rgb, v_fog.a);
 
   gl_FragColor = diffuse;
 }

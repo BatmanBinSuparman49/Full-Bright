@@ -2,7 +2,7 @@ $input a_color0, a_position, a_texcoord0, a_texcoord1
 #ifdef INSTANCING
   $input i_data0, i_data1, i_data2, i_data3
 #endif
-$output v_color0, v_color1, v_texcoord0, v_lightmapUV
+$output v_color0, v_color1, v_texcoord0, v_lightmapUV, v_fog
 
 #include <bgfx_shader.sh>
 
@@ -24,6 +24,8 @@ void main() {
 
   #if !(defined(DEPTH_ONLY_OPAQUE) || defined(DEPTH_ONLY) || defined(INSTANCING))
 
+  worldPos.y -= 100.0*RenderChunkFogAlpha.x*RenderChunkFogAlpha.x*RenderChunkFogAlpha.x;
+
   vec4 color;
   #ifdef RENDER_AS_BILLBOARDS
     worldPos += vec3(0.5, 0.5, 0.5);
@@ -36,16 +38,22 @@ void main() {
   #endif
 
   vec3 modelCamPos = ViewPositionAndTime.xyz - worldPos;
+  float camDis     = length(modelCamPos);
   float relativeDepth = length(modelCamPos) / FogAndDistanceControl.w;
 
   vec2 uv1 = fract(a_texcoord1.y*vec2(256.0, 4096.0));
 
   vec4 pos = mul(u_viewProj, vec4(worldPos, 1.0));
 
+  vec4 fogColor;
+  fogColor.rgb = FogColor.rgb;
+  fogColor.a   = clamp(((((camDis / FogAndDistanceControl.z) + RenderChunkFogAlpha.x) - FogAndDistanceControl.x) / (FogAndDistanceControl.y - FogAndDistanceControl.x)), 0.0, 1.0); 
+ 
   v_texcoord0 = a_texcoord0;
   v_lightmapUV = uv1;
   v_color0 = color;
   v_color1 = a_color0;
+  v_fog    = fogColor;
 
   #else
 
