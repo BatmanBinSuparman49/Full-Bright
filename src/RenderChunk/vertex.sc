@@ -47,9 +47,12 @@ void main() {
 
   vec4 fogColor;
   fogColor.rgb = FogColor.rgb;
-  fogColor.a   = clamp(((((camDis / FogAndDistanceControl.z) + RenderChunkFogAlpha.x) - FogAndDistanceControl.x) / (FogAndDistanceControl.y - FogAndDistanceControl.x)), 0.0, 1.0); 
+  fogColor.a   = clamp(((((camDis / FogAndDistanceControl.z) + RenderChunkFogAlpha.x) - FogAndDistanceControl.x) / (FogAndDistanceControl.y - FogAndDistanceControl.x)), 0.0, 1.0);
+
+  vec2 uv0 = 2.0*a_texcoord0.xy;
+  uv0 = fract(uv0) + ((floor(uv0)-0.5)/16384.0); 
  
-  v_texcoord0 = a_texcoord0;
+  v_texcoord0 = uv0;
   v_lightmapUV = uv1;
   v_color0 = color;
   v_color1 = a_color0;

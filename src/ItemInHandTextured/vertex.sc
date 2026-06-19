@@ -41,8 +41,11 @@ void main() {
     v_color0 = a_color0;
 #endif
 
+    vec2 uv0 = 2.0*a_texcoord0.xy;
+    uv0 = fract(uv0) + ((floor(uv0)-0.5)/16384.0);
+
     v_light = light;
     v_fog = fog;
-    v_texcoord0 = a_texcoord0;
+    v_texcoord0 = uv0;
     gl_Position = position;
 }
