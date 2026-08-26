@@ -1,7 +1,7 @@
 @echo off
 
 set PLATFORM=%1
-if "%PLATFORM%"=="" set PLATFORM=merged
+if "%PLATFORM%"=="" set PLATFORM=windows
 
 lazurite build ./src -p %PLATFORM%
 

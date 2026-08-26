@@ -1,0 +1,18 @@
+{
+  "macro_overwrite": {
+    "passes": {
+      "AlphaTest": "ALPHA_TEST",
+      "DepthOnly": "DEPTH_ONLY",
+      "DepthOnlyOpaque": "DEPTH_ONLY_OPAQUE",
+      "Opaque": "OPAQUE",
+      "Transparent": "TRANSPARENT"
+    }
+  },
+  "file_overwrite": {
+    "default": {
+      "fragment": "fragment.sc",
+      "vertex": "vertex.sc",
+      "varying": "varying.def.sc"
+    }
+  }
+}
