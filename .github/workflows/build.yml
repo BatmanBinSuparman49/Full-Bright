@@ -28,7 +28,7 @@ jobs:
         cache: 'pip'
 
     - name: Install Lazurite
-      run: pip install lazurite
+      run: pip install -r requirements.txt
 
     - name: Execute Local Build Script
       # This calls your .bat and passes the 'platform' choice as %1
